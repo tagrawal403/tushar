@@ -130,7 +130,13 @@ function App() {
   const logout = () => {
     localStorage.removeItem('token');
     setUser(null);
-    setCartCount(0);
+    
+    // Generate new guest ID and fetch guest cart
+    const newGuestId = `guest_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    localStorage.setItem('guestId', newGuestId);
+    setGuestId(newGuestId);
+    fetchGuestCart(newGuestId);
+    
     toast.success("Logged out successfully");
   };
 
