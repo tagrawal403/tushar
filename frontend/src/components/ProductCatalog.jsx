@@ -273,6 +273,15 @@ const ProductCatalog = ({ limit = null, showViewAll = false }) => {
           </div>
         )}
       </div>
+
+      {/* Size Selection Modal */}
+      <SizeSelectionModal
+        product={selectedProduct}
+        isOpen={showSizeModal}
+        onClose={() => setShowSizeModal(false)}
+        onAddToCart={addToCart}
+        isLoading={addingToCart}
+      />
     </section>
   );
 };
