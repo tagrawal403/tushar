@@ -356,18 +356,22 @@ async def create_payment_order(payment_data: MockPayment):
         "status": "created"
     }
 
+class PaymentVerification(BaseModel):
+    payment_id: str
+    order_id: str
+
 @api_router.post("/payments/verify")
-async def verify_payment(payment_id: str, order_id: str):
+async def verify_payment(verification_data: PaymentVerification):
     # Mock payment verification (always succeeds in mock)
     # Update order status
     await db.orders.update_one(
-        {"id": order_id},
-        {"$set": {"status": "paid", "payment_id": payment_id}}
+        {"id": verification_data.order_id},
+        {"$set": {"status": "paid", "payment_id": verification_data.payment_id}}
     )
     
     # Update mock payment status
     await db.mock_payments.update_one(
-        {"id": payment_id},
+        {"id": verification_data.payment_id},
         {"$set": {"status": "captured"}}
     )
     
