@@ -293,7 +293,7 @@ async def get_cart(guest_id: Optional[str] = None, current_user: Optional[User] 
                 "item_total": item_total
             })
     
-    return CartResponse(items=enriched_items, total=total)
+    return {"items": enriched_items, "total": total}
 
 @api_router.post("/cart/add")
 async def add_to_cart(item_data: CartItemCreate, current_user: Optional[User] = Depends(get_current_user_optional)):
