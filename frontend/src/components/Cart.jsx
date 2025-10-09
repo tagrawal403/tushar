@@ -90,7 +90,11 @@ const Cart = () => {
   };
 
   const proceedToCheckout = () => {
-    navigate('/checkout');
+    if (!user) {
+      setShowAuthModal(true);
+    } else {
+      navigate('/checkout');
+    }
   };
 
   if (loading) {
