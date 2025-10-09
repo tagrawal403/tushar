@@ -433,6 +433,9 @@ async def init_sample_data():
             "image_url": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400",
             "category": "hoodies",
             "in_stock": True,
+            "available_sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+            "available_colors": ["Gray", "Black", "Navy"],
+            "size_stock": {"XS": 5, "S": 8, "M": 12, "L": 10, "XL": 6, "XXL": 0},
             "created_at": datetime.now(timezone.utc).isoformat()
         },
         {
