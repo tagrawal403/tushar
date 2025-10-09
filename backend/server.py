@@ -82,14 +82,20 @@ class CartItem(BaseModel):
     model_config = ConfigDict(extra="ignore")
     
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    user_id: str
+    user_id: Optional[str] = None  # Allow null for guest users
+    guest_id: Optional[str] = None  # For guest checkout
     product_id: str
     quantity: int
+    selected_size: Optional[str] = None
+    selected_color: Optional[str] = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class CartItemCreate(BaseModel):
     product_id: str
     quantity: int
+    selected_size: Optional[str] = None
+    selected_color: Optional[str] = None
+    guest_id: Optional[str] = None  # For guest users
 
 class CartResponse(BaseModel):
     items: List[dict]
