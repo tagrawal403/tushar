@@ -446,6 +446,9 @@ async def init_sample_data():
             "image_url": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
             "category": "tshirts",
             "in_stock": True,
+            "available_sizes": ["XS", "S", "M", "L", "XL"],
+            "available_colors": ["White", "Black", "Beige"],
+            "size_stock": {"XS": 3, "S": 7, "M": 15, "L": 12, "XL": 8},
             "created_at": datetime.now(timezone.utc).isoformat()
         },
         {
