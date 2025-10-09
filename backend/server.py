@@ -252,9 +252,15 @@ async def create_product(product_data: ProductCreate):
     return product
 
 # Cart Routes
-@api_router.get("/cart", response_model=CartResponse)
-async def get_cart(current_user: User = Depends(get_current_user)):
-    cart_items = await db.cart_items.find({"user_id": current_user.id}, {"_id": 0}).to_list(1000)
+@api_router.get("/cart")
+async def get_cart(guest_id: Optional[str] = None, current_user: Optional[User] = Depends(get_current_user)):
+    # Handle both authenticated and guest users
+    if current_user:
+        cart_items = await db.cart_items.find({"user_id": current_user.id}, {"_id": 0}).to_list(1000)
+    elif guest_id:
+        cart_items = await db.cart_items.find({"guest_id": guest_id}, {"_id": 0}).to_list(1000)
+    else:
+        return CartResponse(items=[], total=0.0)
     
     # Get product details for each cart item
     enriched_items = []
