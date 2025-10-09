@@ -17,7 +17,7 @@ const Cart = () => {
 
   useEffect(() => {
     fetchCart();
-  }, []);
+  }, [user, guestId]);
 
   const fetchCart = async () => {
     try {
