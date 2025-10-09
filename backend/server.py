@@ -296,7 +296,7 @@ async def get_cart(guest_id: Optional[str] = None, current_user: Optional[User] 
     return CartResponse(items=enriched_items, total=total)
 
 @api_router.post("/cart/add")
-async def add_to_cart(item_data: CartItemCreate, current_user: Optional[User] = Depends(get_current_user)):
+async def add_to_cart(item_data: CartItemCreate, current_user: Optional[User] = Depends(get_current_user_optional)):
     # Check if product exists
     product = await db.products.find_one({"id": item_data.product_id})
     if not product:
