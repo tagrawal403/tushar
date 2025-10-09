@@ -162,7 +162,18 @@ const Cart = () => {
                     <h3 className="text-lg font-semibold text-gray-900" data-testid={`item-name-${item.id}`}>
                       {item.product.name}
                     </h3>
-                    <p className="text-gray-600 text-sm mt-1">{item.product.description}</p>
+                    <div className="flex items-center space-x-4 mt-1">
+                      {item.selected_size && (
+                        <span className="text-sm text-gray-600">
+                          Size: <span className="font-medium">{item.selected_size}</span>
+                        </span>
+                      )}
+                      {item.selected_color && (
+                        <span className="text-sm text-gray-600">
+                          Color: <span className="font-medium">{item.selected_color}</span>
+                        </span>
+                      )}
+                    </div>
                     <p className="text-orange-500 font-semibold mt-2" data-testid={`item-price-${item.id}`}>
                       ₹{item.product.price.toLocaleString()}
                     </p>
