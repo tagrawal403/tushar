@@ -54,20 +54,22 @@ const Header = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
+            {/* Cart is always visible */}
+            <Link
+              to="/cart"
+              className="relative p-2 text-gray-700 hover:text-orange-500 transition-colors"
+              data-testid="cart-link"
+            >
+              <ShoppingCart size={24} />
+              {cartCount > 0 && (
+                <span className="cart-badge" data-testid="cart-count">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+            
             {user ? (
               <>
-                <Link
-                  to="/cart"
-                  className="relative p-2 text-gray-700 hover:text-orange-500 transition-colors"
-                  data-testid="cart-link"
-                >
-                  <ShoppingCart size={24} />
-                  {cartCount > 0 && (
-                    <span className="cart-badge" data-testid="cart-count">
-                      {cartCount}
-                    </span>
-                  )}
-                </Link>
                 <Link
                   to="/profile"
                   className="p-2 text-gray-700 hover:text-orange-500 transition-colors"
