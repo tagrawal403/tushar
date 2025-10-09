@@ -10,12 +10,15 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const ProductCatalog = ({ limit = null, showViewAll = false }) => {
-  const { user, setCartCount } = useContext(AuthContext);
+  const { user, setCartCount, guestId } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showSizeModal, setShowSizeModal] = useState(false);
+  const [addingToCart, setAddingToCart] = useState(false);
 
   const categories = [
     { id: "all", name: "All" },
