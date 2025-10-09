@@ -9,7 +9,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const Checkout = () => {
-  const { user, setCartCount } = useContext(AuthContext);
+  const { user, setCartCount, guestId } = useContext(AuthContext);
   const navigate = useNavigate();
   const [cart, setCart] = useState({ items: [], total: 0 });
   const [loading, setLoading] = useState(true);
