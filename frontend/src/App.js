@@ -168,9 +168,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<ProductCatalog />} />
             <Route path="/products/:id" element={<ProductDetail />} />
-            <Route path="/cart" element={
-              user ? <Cart /> : <Navigate to="/auth" replace />
-            } />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={
               user ? <Checkout /> : <Navigate to="/auth" replace />
             } />
