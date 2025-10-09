@@ -154,7 +154,16 @@ function App() {
             <Route path="/orders" element={
               user ? <Orders /> : <Navigate to="/auth" replace />
             } />
+            <Route path="/track-order" element={<TrackOrder />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/returns-policy" element={<ReturnsPolicy />} />
+            <Route path="/returns/request" element={
+              user ? <ReturnRequest /> : <Navigate to="/auth" replace />
+            } />
+            <Route path="/shipping-policy" element={<ShippingPolicy />} />
+            <Route path="/terms-conditions" element={<TermsConditions />} />
           </Routes>
+          <Footer />
           <Toaster position="top-right" />
         </BrowserRouter>
       </div>
