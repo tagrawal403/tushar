@@ -15,6 +15,13 @@ import Checkout from "./components/Checkout";
 import Auth from "./components/Auth";
 import Profile from "./components/Profile";
 import Orders from "./components/Orders";
+import TrackOrder from "./components/TrackOrder";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import ReturnsPolicy from "./components/ReturnsPolicy";
+import ReturnRequest from "./components/ReturnRequest";
+import ShippingPolicy from "./components/ShippingPolicy";
+import TermsConditions from "./components/TermsConditions";
+import Footer from "./components/Footer";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
