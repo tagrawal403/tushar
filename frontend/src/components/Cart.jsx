@@ -257,6 +257,50 @@ const Cart = () => {
           </div>
         </div>
       </div>
+
+      {/* Auth Modal for Guest Checkout */}
+      {showAuthModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Choose an Option</h2>
+            <p className="text-gray-600 mb-6">
+              To proceed with checkout, you can either continue as a guest or create an account for faster future checkouts.
+            </p>
+            
+            <div className="space-y-3">
+              <button
+                onClick={() => {
+                  setShowAuthModal(false);
+                  navigate('/checkout');
+                }}
+                className="w-full btn-primary py-3"
+                data-testid="guest-checkout-button"
+              >
+                Continue as Guest
+              </button>
+              
+              <button
+                onClick={() => {
+                  setShowAuthModal(false);
+                  navigate('/auth');
+                }}
+                className="w-full btn-secondary py-3"
+                data-testid="login-signup-button"
+              >
+                Login / Sign Up
+              </button>
+              
+              <button
+                onClick={() => setShowAuthModal(false)}
+                className="w-full text-gray-500 hover:text-gray-700 py-2"
+                data-testid="cancel-checkout-button"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
