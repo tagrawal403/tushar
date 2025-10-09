@@ -21,10 +21,21 @@ const Cart = () => {
 
   const fetchCart = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get(`${API}/cart`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      let response;
+      
+      if (user) {
+        const token = localStorage.getItem('token');
+        response = await axios.get(`${API}/cart`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+      } else if (guestId) {
+        response = await axios.get(`${API}/cart?guest_id=${guestId}`);
+      } else {
+        setCart({ items: [], total: 0 });
+        setLoading(false);
+        return;
+      }
+      
       setCart(response.data);
       setCartCount(response.data.items.length);
     } catch (error) {
