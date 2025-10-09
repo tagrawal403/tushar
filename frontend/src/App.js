@@ -147,7 +147,8 @@ function App() {
     logout,
     isAuthenticated: !!user,
     cartCount,
-    setCartCount
+    setCartCount,
+    guestId
   };
 
   if (isLoading) {
