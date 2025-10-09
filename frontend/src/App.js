@@ -33,12 +33,24 @@ function App() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [cartCount, setCartCount] = useState(0);
+  const [guestId, setGuestId] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const storedGuestId = localStorage.getItem('guestId');
+    
     if (token) {
       fetchUser(token);
     } else {
+      // Generate guest ID if doesn't exist
+      if (!storedGuestId) {
+        const newGuestId = `guest_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        localStorage.setItem('guestId', newGuestId);
+        setGuestId(newGuestId);
+      } else {
+        setGuestId(storedGuestId);
+      }
+      fetchGuestCart(storedGuestId);
       setIsLoading(false);
     }
   }, []);
