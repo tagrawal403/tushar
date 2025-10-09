@@ -269,7 +269,7 @@ async def create_product(product_data: ProductCreate):
 
 # Cart Routes
 @api_router.get("/cart")
-async def get_cart(guest_id: Optional[str] = None, current_user: Optional[User] = Depends(get_current_user)):
+async def get_cart(guest_id: Optional[str] = None, current_user: Optional[User] = Depends(get_current_user_optional)):
     # Handle both authenticated and guest users
     if current_user:
         cart_items = await db.cart_items.find({"user_id": current_user.id}, {"_id": 0}).to_list(1000)
