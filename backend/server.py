@@ -280,17 +280,38 @@ async def get_cart(guest_id: Optional[str] = None, current_user: Optional[User] 
     return CartResponse(items=enriched_items, total=total)
 
 @api_router.post("/cart/add")
-async def add_to_cart(item_data: CartItemCreate, current_user: User = Depends(get_current_user)):
+async def add_to_cart(item_data: CartItemCreate, current_user: Optional[User] = Depends(get_current_user)):
     # Check if product exists
     product = await db.products.find_one({"id": item_data.product_id})
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")
     
-    # Check if item already in cart
-    existing_item = await db.cart_items.find_one({
-        "user_id": current_user.id,
-        "product_id": item_data.product_id
-    })
+    # Check size availability if size is selected
+    if item_data.selected_size:
+        size_stock = product.get("size_stock", {})
+        if item_data.selected_size in size_stock and size_stock[item_data.selected_size] == 0:
+            raise HTTPException(status_code=400, detail=f"Size {item_data.selected_size} is out of stock")
+    
+    # Determine user identification
+    user_id = current_user.id if current_user else None
+    guest_id = item_data.guest_id if not current_user else None
+    
+    if not user_id and not guest_id:
+        raise HTTPException(status_code=400, detail="User ID or Guest ID required")
+    
+    # Check if item already in cart (same product, size, color)
+    query = {
+        "product_id": item_data.product_id,
+        "selected_size": item_data.selected_size,
+        "selected_color": item_data.selected_color
+    }
+    
+    if current_user:
+        query["user_id"] = user_id
+    else:
+        query["guest_id"] = guest_id
+    
+    existing_item = await db.cart_items.find_one(query)
     
     if existing_item:
         # Update quantity
@@ -302,9 +323,12 @@ async def add_to_cart(item_data: CartItemCreate, current_user: User = Depends(ge
     else:
         # Add new item
         cart_item = CartItem(
-            user_id=current_user.id,
+            user_id=user_id,
+            guest_id=guest_id,
             product_id=item_data.product_id,
-            quantity=item_data.quantity
+            quantity=item_data.quantity,
+            selected_size=item_data.selected_size,
+            selected_color=item_data.selected_color
         )
         cart_item_dict = prepare_for_mongo(cart_item.model_dump())
         await db.cart_items.insert_one(cart_item_dict)
