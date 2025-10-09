@@ -81,6 +81,16 @@ function App() {
     }
   };
 
+  const fetchGuestCart = async (guestId) => {
+    if (!guestId) return;
+    try {
+      const response = await axios.get(`${API}/cart?guest_id=${guestId}`);
+      setCartCount(response.data.items.length);
+    } catch (error) {
+      console.error('Failed to fetch guest cart:', error);
+    }
+  };
+
   const login = async (email, password) => {
     try {
       const response = await axios.post(`${API}/auth/login`, { email, password });
