@@ -83,30 +83,51 @@ const ProductCatalog = ({ limit = null, showViewAll = false }) => {
     setFilteredProducts(filtered);
   };
 
-  const addToCart = async (product) => {
-    if (!user) {
-      toast.error("Please login to add items to cart");
-      return;
-    }
+  const handleQuickAdd = (product) => {
+    setSelectedProduct(product);
+    setShowSizeModal(true);
+  };
 
+  const addToCart = async ({ product, selectedSize, selectedColor, quantity }) => {
+    setAddingToCart(true);
+    
     try {
-      const token = localStorage.getItem('token');
-      await axios.post(
-        `${API}/cart/add`,
-        { product_id: product.id, quantity: 1 },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const cartData = {
+        product_id: product.id,
+        quantity,
+        selected_size: selectedSize,
+        selected_color: selectedColor,
+        guest_id: user ? null : guestId
+      };
+
+      if (user) {
+        const token = localStorage.getItem('token');
+        await axios.post(`${API}/cart/add`, cartData, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        
+        // Update cart count for authenticated users
+        const cartResponse = await axios.get(`${API}/cart`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setCartCount(cartResponse.data.items.length);
+      } else {
+        // Guest user
+        await axios.post(`${API}/cart/add`, cartData);
+        
+        // Update cart count for guest users
+        const cartResponse = await axios.get(`${API}/cart?guest_id=${guestId}`);
+        setCartCount(cartResponse.data.items.length);
+      }
       
-      // Update cart count
-      const cartResponse = await axios.get(`${API}/cart`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      setCartCount(cartResponse.data.items.length);
-      
-      toast.success(`${product.name} added to cart!`);
+      setShowSizeModal(false);
+      toast.success(`${product.name} (${selectedSize}) added to cart!`);
     } catch (error) {
       console.error('Failed to add to cart:', error);
-      toast.error("Failed to add item to cart");
+      const errorMessage = error.response?.data?.detail || "Failed to add item to cart";
+      toast.error(errorMessage);
+    } finally {
+      setAddingToCart(false);
     }
   };
 
