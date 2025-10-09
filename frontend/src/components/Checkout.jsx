@@ -34,10 +34,20 @@ const Checkout = () => {
 
   const fetchCart = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get(`${API}/cart`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      let response;
+      
+      if (user) {
+        const token = localStorage.getItem('token');
+        response = await axios.get(`${API}/cart`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+      } else if (guestId) {
+        response = await axios.get(`${API}/cart?guest_id=${guestId}`);
+      } else {
+        navigate('/cart');
+        return;
+      }
+      
       setCart(response.data);
       
       if (response.data.items.length === 0) {
