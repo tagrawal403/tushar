@@ -68,6 +68,9 @@ class Product(BaseModel):
     image_url: str
     category: str
     in_stock: bool = True
+    available_sizes: List[str] = ["XS", "S", "M", "L", "XL", "XXL"]
+    available_colors: List[str] = ["Black", "White", "Gray"]
+    size_stock: dict = {}  # {"M": 10, "L": 5, "XL": 0} - 0 means out of stock
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class ProductCreate(BaseModel):
