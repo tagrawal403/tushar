@@ -105,6 +105,22 @@ const Checkout = () => {
     }
   };
 
+  const handlePaymentComplete = (paymentStatus) => {
+    // Payment successful - complete the order
+    setProcessing(false);
+    setOrderComplete(true);
+    setCartCount(0);
+    setShowPaymentTracker(false);
+    toast.success("Payment completed! Your order has been confirmed.");
+  };
+
+  const handlePaymentFailed = (paymentStatus) => {
+    // Payment failed - allow retry
+    setProcessing(false);
+    setShowPaymentTracker(false);
+    toast.error("Payment failed. You can try again or choose a different payment method.");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
