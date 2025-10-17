@@ -40,9 +40,13 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const adminToken = localStorage.getItem('adminToken');
     const storedGuestId = localStorage.getItem('guestId');
     
-    if (token) {
+    if (adminToken) {
+      setAdminUser({ token: adminToken });
+      setIsLoading(false);
+    } else if (token) {
       fetchUser(token);
     } else {
       // Generate guest ID if doesn't exist
