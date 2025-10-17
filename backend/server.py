@@ -670,6 +670,113 @@ async def update_product_stock(product_id: str, stock_data: dict, admin_user = D
     )
     return {"message": "Stock updated successfully"}
 
+# Real-time Payment Status Tracking
+@api_router.get("/payments/{payment_id}/status")
+async def get_payment_status(payment_id: str):
+    """Get real-time payment status"""
+    payment_order = await db.payment_orders.find_one({"id": payment_id}, {"_id": 0})
+    if not payment_order:
+        raise HTTPException(status_code=404, detail="Payment not found")
+    
+    # Get associated order
+    order = await db.orders.find_one({"id": payment_order["order_id"]}, {"_id": 0})
+    
+    return {
+        "payment_id": payment_id,
+        "order_id": payment_order["order_id"],
+        "amount": payment_order["amount"],
+        "status": payment_order.get("status", "pending"),
+        "payment_status": payment_order.get("payment_status", "pending"),
+        "failure_reason": payment_order.get("failure_reason"),
+        "order_status": order.get("status", "pending") if order else "not_found",
+        "created_at": payment_order["created_at"],
+        "expires_at": payment_order.get("expires_at")
+    }
+
+@api_router.get("/orders/{order_id}/payment-status")
+async def get_order_payment_status(order_id: str):
+    """Get payment status for an order"""
+    order = await db.orders.find_one({"id": order_id}, {"_id": 0})
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    # Get payment logs for this order
+    payment_logs = await db.payment_logs.find(
+        {"order_id": order_id}, 
+        {"_id": 0}
+    ).sort("timestamp", -1).limit(10).to_list(None)
+    
+    return {
+        "order_id": order_id,
+        "status": order.get("status"),
+        "payment_status": order.get("payment_status"),
+        "payment_id": order.get("payment_id"),
+        "payment_method": order.get("payment_method"),
+        "total_amount": order.get("total_amount"),
+        "created_at": order.get("created_at"),
+        "updated_at": order.get("updated_at"),
+        "payment_logs": payment_logs
+    }
+
+@api_router.post("/payments/{payment_id}/simulate-result")
+async def simulate_payment_result(payment_id: str, result_type: str):
+    """Simulate payment success/failure for testing (admin only)"""
+    # This is for testing purposes - in production, this would be called by payment gateway webhooks
+    
+    payment_order = await db.payment_orders.find_one({"id": payment_id})
+    if not payment_order:
+        raise HTTPException(status_code=404, detail="Payment not found")
+    
+    if result_type == "success":
+        await handle_payment_success(payment_order["order_id"], payment_id)
+        return {"status": "success", "message": "Payment marked as successful"}
+    elif result_type == "failure":
+        await handle_payment_failure(payment_order["order_id"], payment_id, "Simulated failure for testing")
+        return {"status": "failed", "message": "Payment marked as failed"}
+    else:
+        raise HTTPException(status_code=400, detail="Invalid result type. Use 'success' or 'failure'")
+
+# Admin Payment Management
+@api_router.get("/admin/payments", dependencies=[Depends(get_admin_user)])
+async def get_all_payments():
+    """Get all payments for admin dashboard"""
+    payments = await db.payment_orders.find({}, {"_id": 0}).sort("created_at", -1).limit(50).to_list(None)
+    
+    # Enrich with order details
+    enriched_payments = []
+    for payment in payments:
+        order = await db.orders.find_one({"id": payment["order_id"]}, {"_id": 0})
+        if order:
+            payment["order_details"] = {
+                "items_count": len(order.get("items", [])),
+                "shipping_address": order.get("shipping_address", {}),
+                "user_id": order.get("user_id"),
+                "guest_id": order.get("guest_id")
+            }
+        enriched_payments.append(payment)
+    
+    return enriched_payments
+
+@api_router.get("/admin/payment-stats", dependencies=[Depends(get_admin_user)])
+async def get_payment_stats():
+    """Get payment statistics for admin dashboard"""
+    # Count payments by status
+    pipeline = [
+        {"$group": {"_id": "$payment_status", "count": {"$sum": 1}, "total_amount": {"$sum": "$amount"}}}
+    ]
+    stats = await db.payment_orders.aggregate(pipeline).to_list(None)
+    
+    # Get recent failed payments
+    failed_payments = await db.payment_orders.find(
+        {"payment_status": "failed"}, 
+        {"_id": 0}
+    ).sort("failed_at", -1).limit(10).to_list(None)
+    
+    return {
+        "stats": stats,
+        "recent_failures": failed_payments
+    }
+
 @api_router.get("/admin/products/stats")
 async def get_product_stats(admin_user = Depends(get_admin_user)):
     total_products = await db.products.count_documents({})
