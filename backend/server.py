@@ -390,9 +390,19 @@ async def remove_from_cart(item_id: str, current_user: User = Depends(get_curren
 
 # Order Routes
 @api_router.post("/orders", response_model=Order)
-async def create_order(order_data: OrderCreate, current_user: User = Depends(get_current_user)):
+async def create_order(order_data: OrderCreate, current_user: Optional[User] = Depends(get_current_user_optional), guest_id: Optional[str] = None):
+    # Determine user identification
+    user_id = current_user.id if current_user else None
+    order_guest_id = guest_id if not current_user else None
+    
+    if not user_id and not order_guest_id:
+        raise HTTPException(status_code=400, detail="User ID or Guest ID required")
+    
     order = Order(
-        user_id=current_user.id,
+        user_id=user_id,
+        guest_id=order_guest_id,
+        status="pending",
+        payment_status="pending",
         **order_data.model_dump()
     )
     
@@ -400,7 +410,10 @@ async def create_order(order_data: OrderCreate, current_user: User = Depends(get
     await db.orders.insert_one(order_dict)
     
     # Clear cart after order creation
-    await db.cart_items.delete_many({"user_id": current_user.id})
+    if current_user:
+        await db.cart_items.delete_many({"user_id": current_user.id})
+    elif order_guest_id:
+        await db.cart_items.delete_many({"guest_id": order_guest_id})
     
     return order
 
