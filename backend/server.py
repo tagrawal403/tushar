@@ -429,26 +429,45 @@ async def get_order(order_id: str, current_user: User = Depends(get_current_user
         raise HTTPException(status_code=404, detail="Order not found")
     return Order(**parse_from_mongo(order))
 
-# Mock Payment Routes
+# Enhanced Payment System
 @api_router.post("/payments/create-order")
 async def create_payment_order(payment_data: MockPayment):
-    # Mock Razorpay order creation
-    mock_order_id = f"order_mock_{str(uuid.uuid4())[:8]}"
+    # Verify order exists
+    order = await db.orders.find_one({"id": payment_data.order_id}, {"_id": 0})
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
     
-    # Store mock payment data
+    # Create payment order
+    payment_order_id = f"order_mock_{str(uuid.uuid4())[:8]}"
+    
+    # Store payment data with detailed tracking
     payment_doc = {
-        "id": mock_order_id,
+        "id": payment_order_id,
         "order_id": payment_data.order_id,
         "amount": payment_data.amount,
         "currency": "INR",
         "status": "created",
-        "created_at": datetime.now(timezone.utc).isoformat()
+        "payment_status": "pending",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "expires_at": (datetime.now(timezone.utc) + timedelta(minutes=15)).isoformat()  # 15 min expiry
     }
     
-    await db.mock_payments.insert_one(payment_doc)
+    await db.payment_orders.insert_one(payment_doc)
+    
+    # Update order status to payment_initiated
+    await db.orders.update_one(
+        {"id": payment_data.order_id},
+        {
+            "$set": {
+                "status": "payment_initiated",
+                "payment_status": "processing",
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            }
+        }
+    )
     
     return {
-        "id": mock_order_id,
+        "id": payment_order_id,
         "amount": int(payment_data.amount * 100),  # Convert to paise
         "currency": "INR",
         "status": "created"
