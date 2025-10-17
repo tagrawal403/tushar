@@ -149,6 +149,13 @@ class MockPayment(BaseModel):
     order_id: str
     amount: float
 
+class PaymentStatus(BaseModel):
+    payment_id: str
+    status: str  # pending, processing, completed, failed
+    order_id: str
+    amount: float
+    failure_reason: Optional[str] = None
+
 # Auth Helper Functions
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
