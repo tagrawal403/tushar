@@ -147,6 +147,15 @@ function App() {
     toast.success("Logged out successfully");
   };
 
+  const handleAdminLogin = (token) => {
+    setAdminUser({ token });
+  };
+
+  const handleAdminLogout = () => {
+    localStorage.removeItem('adminToken');
+    setAdminUser(null);
+  };
+
   const authContextValue = {
     user,
     login,
