@@ -39,9 +39,15 @@ api_router = APIRouter(prefix="/api")
 # Security
 security = HTTPBearer()
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-SECRET_KEY = os.environ.get("JWT_SECRET", "your-secret-key-change-in-production")
+SECRET_KEY = os.environ.get("JWT_SECRET", "thrynn-jwt-secret-key-change-in-production")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+# Debug environment variables
+print(f"Environment check:")
+print(f"MONGO_URL: {os.environ.get('MONGO_URL', 'NOT SET')}")
+print(f"DB_NAME: {os.environ.get('DB_NAME', 'NOT SET')}")
+print(f"JWT_SECRET: {'SET' if os.environ.get('JWT_SECRET') else 'NOT SET'}")
 
 # Auth Models
 class UserRegister(BaseModel):
