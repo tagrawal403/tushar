@@ -50,6 +50,15 @@ const Header = () => {
             >
               Products
             </Link>
+            <Link
+              to="/admin"
+              className={`font-medium transition-colors ${
+                isActive('/admin') ? 'text-orange-500' : 'text-gray-700 hover:text-orange-500'
+              }`}
+              data-testid="admin-nav-link"
+            >
+              Admin
+            </Link>
           </nav>
 
           {/* Desktop Actions */}
