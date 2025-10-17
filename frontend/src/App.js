@@ -203,8 +203,14 @@ function App() {
             } />
             <Route path="/shipping-policy" element={<ShippingPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
+            <Route path="/admin" element={
+              adminUser ? <Navigate to="/admin/dashboard" replace /> : <AdminLogin onLogin={handleAdminLogin} />
+            } />
+            <Route path="/admin/dashboard" element={
+              adminUser ? <AdminDashboard onLogout={handleAdminLogout} /> : <Navigate to="/admin" replace />
+            } />
           </Routes>
-          <Footer />
+          {!adminUser && <Footer />}
           <Toaster position="top-right" />
         </BrowserRouter>
       </div>
