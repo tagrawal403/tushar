@@ -126,26 +126,18 @@ const Checkout = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       
-      // Process payment (mock)
+      // Process payment - this now shows the payment tracker
       const paymentResult = await processPayment(orderResponse.data);
       
-      // Verify payment
-      await axios.post(`${API}/payments/verify`, {
-        payment_id: paymentResult.razorpay_payment_id,
-        order_id: orderResponse.data.id
-      });
-      
-      // Update cart count
-      setCartCount(0);
+      // Store order details
       setOrderId(orderResponse.data.id);
-      setOrderComplete(true);
       
-      toast.success("Order placed successfully!");
+      // Payment verification will be handled by the PaymentTracker component
+      toast.success("Order created! Processing payment...");
       
     } catch (error) {
       console.error('Checkout failed:', error);
       toast.error("Failed to process order. Please try again.");
-    } finally {
       setProcessing(false);
     }
   };
