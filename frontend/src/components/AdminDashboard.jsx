@@ -156,6 +156,47 @@ const AdminDashboard = ({ onLogout }) => {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Tabs Navigation */}
+        <div className="mb-8">
+          <div className="border-b border-gray-200">
+            <nav className="-mb-px flex space-x-8">
+              <button
+                onClick={() => setActiveTab("products")}
+                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === "products"
+                    ? "border-orange-500 text-orange-600"
+                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                }`}
+                data-testid="products-tab"
+              >
+                <div className="flex items-center space-x-2">
+                  <Package size={20} />
+                  <span>Products</span>
+                </div>
+              </button>
+              <button
+                onClick={() => setActiveTab("payments")}
+                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === "payments"
+                    ? "border-orange-500 text-orange-600"
+                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                }`}
+                data-testid="payments-tab"
+              >
+                <div className="flex items-center space-x-2">
+                  <CreditCard size={20} />
+                  <span>Payments</span>
+                </div>
+              </button>
+            </nav>
+          </div>
+        </div>
+
+        {/* Tab Content */}
+        {activeTab === "payments" ? (
+          <AdminPaymentDashboard />
+        ) : (
+          <>
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
