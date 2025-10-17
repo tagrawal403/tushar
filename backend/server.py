@@ -451,6 +451,103 @@ async def verify_payment(verification_data: PaymentVerification):
     
     return {"status": "success", "message": "Payment verified successfully"}
 
+# Admin Authentication
+ADMIN_CREDENTIALS = {
+    "admin": "admin123",  # Change this password in production
+    "thrynn_admin": "thrynn@2024"
+}
+
+@api_router.post("/admin/login")
+async def admin_login(admin_data: AdminLogin):
+    if admin_data.username not in ADMIN_CREDENTIALS or ADMIN_CREDENTIALS[admin_data.username] != admin_data.password:
+        raise HTTPException(status_code=401, detail="Invalid admin credentials")
+    
+    # Create admin token
+    access_token_expires = timedelta(hours=24)  # Admin sessions last longer
+    access_token = create_access_token(
+        data={"sub": f"admin_{admin_data.username}", "role": "admin"}, 
+        expires_delta=access_token_expires
+    )
+    
+    return {"access_token": access_token, "token_type": "bearer", "role": "admin"}
+
+async def get_admin_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Admin access required",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(credentials.credentials, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        role: str = payload.get("role")
+        if username is None or not username.startswith("admin_") or role != "admin":
+            raise credentials_exception
+    except jwt.PyJWTError:
+        raise credentials_exception
+    
+    return {"username": username, "role": role}
+
+# Admin Product Management Routes
+@api_router.post("/admin/products", response_model=Product)
+async def create_product_admin(product_data: ProductCreate, admin_user = Depends(get_admin_user)):
+    product = Product(**product_data.model_dump())
+    product_dict = prepare_for_mongo(product.model_dump())
+    await db.products.insert_one(product_dict)
+    return product
+
+@api_router.put("/admin/products/{product_id}", response_model=Product)
+async def update_product_admin(product_id: str, product_data: ProductUpdate, admin_user = Depends(get_admin_user)):
+    # Get existing product
+    existing_product = await db.products.find_one({"id": product_id}, {"_id": 0})
+    if not existing_product:
+        raise HTTPException(status_code=404, detail="Product not found")
+    
+    # Update only provided fields
+    update_data = {k: v for k, v in product_data.model_dump().items() if v is not None}
+    update_data = prepare_for_mongo(update_data)
+    
+    await db.products.update_one({"id": product_id}, {"$set": update_data})
+    
+    # Return updated product
+    updated_product = await db.products.find_one({"id": product_id}, {"_id": 0})
+    return Product(**parse_from_mongo(updated_product))
+
+@api_router.delete("/admin/products/{product_id}")
+async def delete_product_admin(product_id: str, admin_user = Depends(get_admin_user)):
+    result = await db.products.delete_one({"id": product_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Product not found")
+    return {"message": "Product deleted successfully"}
+
+@api_router.patch("/admin/products/{product_id}/stock")
+async def update_product_stock(product_id: str, stock_data: dict, admin_user = Depends(get_admin_user)):
+    # Update stock for specific sizes
+    await db.products.update_one(
+        {"id": product_id}, 
+        {"$set": {"size_stock": stock_data}}
+    )
+    return {"message": "Stock updated successfully"}
+
+@api_router.get("/admin/products/stats")
+async def get_product_stats(admin_user = Depends(get_admin_user)):
+    total_products = await db.products.count_documents({})
+    in_stock_products = await db.products.count_documents({"in_stock": True})
+    out_of_stock = total_products - in_stock_products
+    
+    # Get products by category
+    pipeline = [
+        {"$group": {"_id": "$category", "count": {"$sum": 1}}}
+    ]
+    category_stats = await db.products.aggregate(pipeline).to_list(None)
+    
+    return {
+        "total_products": total_products,
+        "in_stock": in_stock_products, 
+        "out_of_stock": out_of_stock,
+        "categories": category_stats
+    }
+
 # Initialize with sample products
 @api_router.post("/init-data")
 async def init_sample_data():
