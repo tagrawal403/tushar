@@ -18,9 +18,17 @@ ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+db_name = os.environ.get('DB_NAME', 'thrynn_ecommerce')
+
+try:
+    client = AsyncIOMotorClient(mongo_url)
+    db = client[db_name]
+    print(f"✅ Connected to MongoDB at {mongo_url}, database: {db_name}")
+except Exception as e:
+    print(f"❌ Failed to connect to MongoDB: {e}")
+    print(f"Using MONGO_URL: {mongo_url}")
+    raise e
 
 # Create the main app without a prefix
 app = FastAPI()
