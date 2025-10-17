@@ -893,13 +893,18 @@ async def init_sample_data():
 # Include the router in the main app
 app.include_router(api_router)
 
+cors_origins = os.environ.get('CORS_ORIGINS', '*')
+allowed_origins = cors_origins.split(',') if cors_origins != '*' else ["*"]
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
+    allow_origins=allowed_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+print(f"CORS Origins: {allowed_origins}")
 
 # Configure logging
 logging.basicConfig(
