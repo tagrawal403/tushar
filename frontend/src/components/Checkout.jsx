@@ -4,6 +4,7 @@ import axios from "axios";
 import { AuthContext } from "../App";
 import { CreditCard, MapPin, User, Phone, Mail, Lock, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
+import PaymentTracker from "./PaymentTracker";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
