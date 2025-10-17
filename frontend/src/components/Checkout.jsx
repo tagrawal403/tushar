@@ -85,23 +85,21 @@ const Checkout = () => {
 
   const processPayment = async (orderData) => {
     try {
-      // Create mock payment order
+      // Create payment order
       const paymentResponse = await axios.post(`${API}/payments/create-order`, {
         order_id: orderData.id,
         amount: orderData.total_amount
       });
 
-      // Simulate Razorpay payment flow
-      return new Promise((resolve) => {
-        // Mock payment success after 2 seconds
-        setTimeout(() => {
-          const mockPaymentId = `pay_mock_${Date.now()}`;
-          resolve({
-            razorpay_payment_id: mockPaymentId,
-            razorpay_order_id: paymentResponse.data.id
-          });
-        }, 2000);
-      });
+      const paymentOrderId = paymentResponse.data.id;
+      setPaymentId(paymentOrderId);
+      setShowPaymentTracker(true);
+
+      // Return payment order details
+      return {
+        razorpay_payment_id: `pay_mock_${Date.now()}`,
+        razorpay_order_id: paymentOrderId
+      };
     } catch (error) {
       throw new Error('Payment processing failed');
     }
