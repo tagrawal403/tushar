@@ -22,6 +22,8 @@ import ReturnRequest from "./components/ReturnRequest";
 import ShippingPolicy from "./components/ShippingPolicy";
 import TermsConditions from "./components/TermsConditions";
 import Footer from "./components/Footer";
+import AdminLogin from "./components/AdminLogin";
+import AdminDashboard from "./components/AdminDashboard";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
