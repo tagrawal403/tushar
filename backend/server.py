@@ -45,6 +45,10 @@ class UserLogin(BaseModel):
     email: EmailStr
     password: str
 
+class AdminLogin(BaseModel):
+    username: str
+    password: str
+
 class User(BaseModel):
     model_config = ConfigDict(extra="ignore")
     
