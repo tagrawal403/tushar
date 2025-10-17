@@ -479,20 +479,118 @@ class PaymentVerification(BaseModel):
 
 @api_router.post("/payments/verify")
 async def verify_payment(verification_data: PaymentVerification):
-    # Mock payment verification (always succeeds in mock)
+    try:
+        # Get payment order details
+        payment_order = await db.payment_orders.find_one({"id": verification_data.payment_id})
+        if not payment_order:
+            raise HTTPException(status_code=404, detail="Payment not found")
+        
+        # Check if payment is expired
+        expires_at = datetime.fromisoformat(payment_order["expires_at"])
+        if datetime.now(timezone.utc) > expires_at:
+            # Mark as failed due to timeout
+            await handle_payment_failure(verification_data.order_id, verification_data.payment_id, "Payment expired")
+            return {"status": "failed", "message": "Payment expired"}
+        
+        # Mock payment verification with random success/failure (90% success rate for testing)
+        import random
+        payment_success = random.random() < 0.9  # 90% success rate
+        
+        if payment_success:
+            # Payment successful
+            await handle_payment_success(verification_data.order_id, verification_data.payment_id)
+            return {"status": "success", "message": "Payment verified and completed successfully"}
+        else:
+            # Payment failed
+            await handle_payment_failure(verification_data.order_id, verification_data.payment_id, "Payment declined by bank")
+            return {"status": "failed", "message": "Payment failed - please try again"}
+            
+    except Exception as e:
+        # Handle unexpected errors
+        await handle_payment_failure(verification_data.order_id, verification_data.payment_id, f"System error: {str(e)}")
+        return {"status": "error", "message": "Payment processing error"}
+
+async def handle_payment_success(order_id: str, payment_id: str):
+    """Handle successful payment processing"""
+    current_time = datetime.now(timezone.utc).isoformat()
+    
     # Update order status
     await db.orders.update_one(
-        {"id": verification_data.order_id},
-        {"$set": {"status": "paid", "payment_id": verification_data.payment_id}}
+        {"id": order_id},
+        {
+            "$set": {
+                "status": "paid",
+                "payment_status": "completed",
+                "payment_id": payment_id,
+                "payment_method": "mock_payment",
+                "updated_at": current_time
+            }
+        }
     )
     
-    # Update mock payment status
-    await db.mock_payments.update_one(
-        {"id": verification_data.payment_id},
-        {"$set": {"status": "captured"}}
+    # Update payment order status
+    await db.payment_orders.update_one(
+        {"id": payment_id},
+        {
+            "$set": {
+                "status": "captured",
+                "payment_status": "completed",
+                "completed_at": current_time
+            }
+        }
     )
     
-    return {"status": "success", "message": "Payment verified successfully"}
+    # Create payment success log
+    await db.payment_logs.insert_one({
+        "id": str(uuid.uuid4()),
+        "order_id": order_id,
+        "payment_id": payment_id,
+        "event": "payment_success",
+        "status": "completed",
+        "timestamp": current_time,
+        "message": "Payment completed successfully"
+    })
+
+async def handle_payment_failure(order_id: str, payment_id: str, reason: str):
+    """Handle failed payment processing"""
+    current_time = datetime.now(timezone.utc).isoformat()
+    
+    # Update order status back to pending
+    await db.orders.update_one(
+        {"id": order_id},
+        {
+            "$set": {
+                "status": "pending",
+                "payment_status": "failed",
+                "updated_at": current_time
+            }
+        }
+    )
+    
+    # Update payment order status
+    await db.payment_orders.update_one(
+        {"id": payment_id},
+        {
+            "$set": {
+                "status": "failed",
+                "payment_status": "failed",
+                "failure_reason": reason,
+                "failed_at": current_time
+            }
+        }
+    )
+    
+    # Create payment failure log
+    await db.payment_logs.insert_one({
+        "id": str(uuid.uuid4()),
+        "order_id": order_id,
+        "payment_id": payment_id,
+        "event": "payment_failed",
+        "status": "failed",
+        "reason": reason,
+        "timestamp": current_time,
+        "message": f"Payment failed: {reason}"
+    })
 
 # Admin Authentication
 ADMIN_CREDENTIALS = {
