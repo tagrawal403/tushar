@@ -128,13 +128,17 @@ class Order(BaseModel):
     model_config = ConfigDict(extra="ignore")
     
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    user_id: str
+    user_id: Optional[str] = None
+    guest_id: Optional[str] = None
     items: List[dict]
     total_amount: float
-    status: str = "pending"
+    status: str = "pending"  # pending, payment_initiated, paid, failed, cancelled, shipped, delivered
     payment_id: Optional[str] = None
+    payment_status: str = "pending"  # pending, processing, completed, failed, refunded
+    payment_method: Optional[str] = None
     shipping_address: dict
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class OrderCreate(BaseModel):
     items: List[dict]
