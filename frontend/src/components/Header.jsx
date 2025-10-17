@@ -139,6 +139,16 @@ const Header = () => {
               >
                 Products
               </Link>
+              <Link
+                to="/admin"
+                className={`font-medium ${
+                  isActive('/admin') ? 'text-orange-500' : 'text-gray-700'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+                data-testid="mobile-admin-link"
+              >
+                Admin
+              </Link>
               
               {user ? (
                 <>
