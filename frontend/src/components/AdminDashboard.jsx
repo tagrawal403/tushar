@@ -15,6 +15,7 @@ import {
 import { toast } from "sonner";
 import axios from "axios";
 import ProductForm from "./ProductForm";
+import AdminPaymentDashboard from "./AdminPaymentDashboard";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
