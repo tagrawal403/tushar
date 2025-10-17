@@ -129,18 +129,23 @@ const Checkout = () => {
     setProcessing(true);
     
     try {
-      const token = localStorage.getItem('token');
-      
-      // Create order
+      // Create order (supports both authenticated and guest users)
       const orderData = {
         items: cart.items,
         total_amount: cart.total,
         shipping_address: shippingInfo
       };
-      
-      const orderResponse = await axios.post(`${API}/orders`, orderData, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+
+      let orderResponse;
+      if (user) {
+        const token = localStorage.getItem('token');
+        orderResponse = await axios.post(`${API}/orders`, orderData, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+      } else {
+        // Guest checkout
+        orderResponse = await axios.post(`${API}/orders?guest_id=${guestId}`, orderData);
+      }
       
       // Process payment - this now shows the payment tracker
       const paymentResult = await processPayment(orderResponse.data);
