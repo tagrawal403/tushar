@@ -28,6 +28,7 @@ const AdminDashboard = ({ onLogout }) => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [showProductForm, setShowProductForm] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
+  const [activeTab, setActiveTab] = useState("products");
 
   const categories = [
     { id: "all", name: "All Categories" },
