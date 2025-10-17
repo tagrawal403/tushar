@@ -36,6 +36,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [cartCount, setCartCount] = useState(0);
   const [guestId, setGuestId] = useState(null);
+  const [adminUser, setAdminUser] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
