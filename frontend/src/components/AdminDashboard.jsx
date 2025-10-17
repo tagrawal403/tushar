@@ -390,6 +390,8 @@ const AdminDashboard = ({ onLogout }) => {
             </div>
           )}
         </div>
+          </>
+        )}
       </div>
 
       {/* Product Form Modal */}
