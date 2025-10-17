@@ -17,6 +17,8 @@ const Checkout = () => {
   const [processing, setProcessing] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
   const [orderId, setOrderId] = useState("");
+  const [paymentId, setPaymentId] = useState("");
+  const [showPaymentTracker, setShowPaymentTracker] = useState(false);
   
   const [shippingInfo, setShippingInfo] = useState({
     fullName: user?.full_name || "",
