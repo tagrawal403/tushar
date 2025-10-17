@@ -185,13 +185,23 @@ const Checkout = () => {
             <p className="font-mono text-lg font-semibold" data-testid="order-id">{orderId}</p>
           </div>
           <div className="space-y-3">
-            <button
-              onClick={() => navigate('/orders')}
-              className="w-full btn-primary"
-              data-testid="view-orders-button"
-            >
-              View My Orders
-            </button>
+            {user ? (
+              <button
+                onClick={() => navigate('/orders')}
+                className="w-full btn-primary"
+                data-testid="view-orders-button"
+              >
+                View My Orders
+              </button>
+            ) : (
+              <button
+                onClick={() => navigate('/track-order')}
+                className="w-full btn-primary"
+                data-testid="track-order-button"
+              >
+                Track Your Order
+              </button>
+            )}
             <button
               onClick={() => navigate('/products')}
               className="w-full btn-secondary"
@@ -201,6 +211,20 @@ const Checkout = () => {
             </button>
           </div>
         </div>
+      </div>
+    );
+  }
+
+  // Show payment tracker during payment processing
+  if (showPaymentTracker) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-8">
+        <PaymentTracker
+          paymentId={paymentId}
+          orderId={orderId}
+          onPaymentComplete={handlePaymentComplete}
+          onPaymentFailed={handlePaymentFailed}
+        />
       </div>
     );
   }
