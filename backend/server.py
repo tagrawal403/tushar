@@ -83,6 +83,21 @@ class ProductCreate(BaseModel):
     price: float
     image_url: str
     category: str
+    available_sizes: Optional[List[str]] = ["XS", "S", "M", "L", "XL", "XXL"]
+    available_colors: Optional[List[str]] = ["Black", "White", "Gray"]
+    size_stock: Optional[dict] = {}
+    in_stock: Optional[bool] = True
+
+class ProductUpdate(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+    price: Optional[float] = None
+    image_url: Optional[str] = None
+    category: Optional[str] = None
+    available_sizes: Optional[List[str]] = None
+    available_colors: Optional[List[str]] = None
+    size_stock: Optional[dict] = None
+    in_stock: Optional[bool] = None
 
 # Cart Models
 class CartItem(BaseModel):
