@@ -26,6 +26,7 @@ import StoreLocator from "./components/StoreLocator";
 import Footer from "./components/Footer";
 import AdminLogin from "./components/AdminLogin";
 import AdminDashboard from "./components/AdminDashboard";
+import ScrollToTop from "./components/ScrollToTop";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
