@@ -64,7 +64,7 @@ const SizeSelectionModal = ({
               <h3 className="font-semibold text-gray-900" data-testid="modal-product-name">
                 {product.name}
               </h3>
-              <p className="text-orange-500 font-bold text-lg" data-testid="modal-product-price">
+              <p className="text-gold-200 font-bold text-lg" data-testid="modal-product-price">
                 ₹{product.price.toLocaleString()}
               </p>
             </div>
