@@ -102,7 +102,7 @@ const SizeSelectionModal = ({
                       </div>
                     )}
                     {stock <= 5 && stock > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs px-1 rounded-full">
+                      <span className="absolute -top-1 -right-1 bg-gold-200 text-black text-xs px-1 rounded-full font-bold">
                         {stock}
                       </span>
                     )}
