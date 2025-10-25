@@ -172,17 +172,19 @@ const Header = () => {
                 Admin
               </Link>
               
+              {/* Cart - Always visible for guest checkout */}
+              <Link
+                to="/cart"
+                className="flex items-center space-x-2 text-gray-200"
+                onClick={() => setIsMobileMenuOpen(false)}
+                data-testid="mobile-cart-menu-link"
+              >
+                <ShoppingCart size={20} />
+                <span>Cart ({cartCount})</span>
+              </Link>
+              
               {user ? (
                 <>
-                  <Link
-                    to="/cart"
-                    className="flex items-center space-x-2 text-gray-200"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    data-testid="mobile-cart-link"
-                  >
-                    <ShoppingCart size={20} />
-                    <span>Cart ({cartCount})</span>
-                  </Link>
                   <Link
                     to="/profile"
                     className="flex items-center space-x-2 text-gray-200"
