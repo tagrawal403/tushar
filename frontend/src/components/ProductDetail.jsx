@@ -152,7 +152,7 @@ const ProductDetail = () => {
 
             {/* Size Selection */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">Size</h3>
+              <h3 className="text-lg font-semibold text-white mb-3">Size</h3>
               <div className="flex flex-wrap gap-3">
                 {sizes.map((size) => (
                   <button
@@ -160,8 +160,8 @@ const ProductDetail = () => {
                     onClick={() => setSelectedSize(size)}
                     className={`px-4 py-2 border rounded-lg font-medium transition-all ${
                       selectedSize === size
-                        ? 'border-orange-500 bg-orange-50 text-orange-600'
-                        : 'border-gray-300 hover:border-gray-400'
+                        ? 'border-gold bg-gold/20 text-gold'
+                        : 'border-gray-600 text-gray-300 hover:border-gold/50'
                     }`}
                     data-testid={`size-${size}`}
                   >
@@ -173,21 +173,21 @@ const ProductDetail = () => {
 
             {/* Quantity */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">Quantity</h3>
+              <h3 className="text-lg font-semibold text-white mb-3">Quantity</h3>
               <div className="flex items-center space-x-3">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+                  className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors text-white border border-gray-700"
                   data-testid="decrease-quantity"
                 >
                   -
                 </button>
-                <span className="text-lg font-semibold min-w-[3rem] text-center" data-testid="quantity-value">
+                <span className="text-lg font-semibold min-w-[3rem] text-center text-white" data-testid="quantity-value">
                   {quantity}
                 </span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
-                  className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+                  className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors text-white border border-gray-700"
                   data-testid="increase-quantity"
                 >
                   +
