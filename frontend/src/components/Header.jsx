@@ -35,7 +35,7 @@ const Header = () => {
             <Link
               to="/"
               className={`font-medium transition-colors ${
-                isActive('/') ? 'text-orange-500' : 'text-gray-700 hover:text-orange-500'
+                isActive('/') ? 'text-gold' : 'text-gray-200 hover:text-gold'
               }`}
               data-testid="home-nav-link"
             >
@@ -44,7 +44,7 @@ const Header = () => {
             <Link
               to="/products"
               className={`font-medium transition-colors ${
-                isActive('/products') ? 'text-orange-500' : 'text-gray-700 hover:text-orange-500'
+                isActive('/products') ? 'text-gold' : 'text-gray-200 hover:text-gold'
               }`}
               data-testid="products-nav-link"
             >
@@ -53,7 +53,7 @@ const Header = () => {
             <Link
               to="/admin"
               className={`font-medium transition-colors ${
-                isActive('/admin') ? 'text-orange-500' : 'text-gray-700 hover:text-orange-500'
+                isActive('/admin') ? 'text-gold' : 'text-gray-200 hover:text-gold'
               }`}
               data-testid="admin-nav-link"
             >
