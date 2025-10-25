@@ -119,7 +119,7 @@ const ProductDetail = () => {
             {/* Header */}
             <div>
               <div className="flex items-center space-x-2 mb-2">
-                <span className="text-sm text-gold font-medium uppercase tracking-wider">
+                <span className="text-sm text-gold-200 font-medium uppercase tracking-wider">
                   {product.category}
                 </span>
                 <span className={`px-2 py-1 text-xs rounded ${product.in_stock ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'}`}>
@@ -132,12 +132,12 @@ const ProductDetail = () => {
               <div className="flex items-center space-x-2 mb-4">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} className="text-gold fill-current" />
+                    <Star key={i} size={16} className="text-gold-200 fill-current" />
                   ))}
                 </div>
                 <span className="text-gray-300 text-sm">(4.8) • 156 reviews</span>
               </div>
-              <p className="text-4xl font-bold text-gold mb-6" data-testid="product-price">
+              <p className="text-4xl font-bold text-gold-200 mb-6" data-testid="product-price">
                 ₹{product.price.toLocaleString()}
               </p>
             </div>
