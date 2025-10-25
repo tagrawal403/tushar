@@ -160,8 +160,8 @@ const ProductDetail = () => {
                     onClick={() => setSelectedSize(size)}
                     className={`px-4 py-2 border rounded-lg font-medium transition-all ${
                       selectedSize === size
-                        ? 'border-gold bg-gold/20 text-gold'
-                        : 'border-gray-600 text-gray-300 hover:border-gold/50'
+                        ? 'border-gold-200 bg-gold-200/20 text-gold-200'
+                        : 'border-gray-600 text-gray-300 hover:border-gold-200/50'
                     }`}
                     data-testid={`size-${size}`}
                   >
