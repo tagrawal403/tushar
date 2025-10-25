@@ -66,7 +66,7 @@ const Header = () => {
             {/* Cart is always visible */}
             <Link
               to="/cart"
-              className="relative p-2 text-gray-200 hover:text-gold transition-colors"
+              className="relative p-2 text-gray-200 hover:text-gold-200 transition-colors"
               data-testid="cart-link"
             >
               <ShoppingCart size={24} />
@@ -81,7 +81,7 @@ const Header = () => {
               <>
                 <Link
                   to="/profile"
-                  className="p-2 text-gray-200 hover:text-gold transition-colors"
+                  className="p-2 text-gray-200 hover:text-gold-200 transition-colors"
                   data-testid="profile-link"
                 >
                   <User size={24} />
