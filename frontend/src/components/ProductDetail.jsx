@@ -217,15 +217,15 @@ const ProductDetail = () => {
             <div className="border-t border-gray-700 pt-6">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="flex items-center space-x-3 text-sm text-gray-300">
-                  <Truck size={20} className="text-gold" />
+                  <Truck size={20} className="text-gold-200" />
                   <span>Free Shipping</span>
                 </div>
                 <div className="flex items-center space-x-3 text-sm text-gray-300">
-                  <Shield size={20} className="text-gold" />
+                  <Shield size={20} className="text-gold-200" />
                   <span>Secure Payment</span>
                 </div>
                 <div className="flex items-center space-x-3 text-sm text-gray-300">
-                  <RotateCcw size={20} className="text-gold" />
+                  <RotateCcw size={20} className="text-gold-200" />
                   <span>Easy Returns</span>
                 </div>
               </div>
