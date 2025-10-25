@@ -76,7 +76,7 @@ const ProductDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Product not found</h2>
+          <h2 className="text-2xl font-semibold text-white mb-4">Product not found</h2>
           <button
             onClick={() => navigate('/products')}
             className="btn-primary"
