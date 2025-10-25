@@ -150,10 +150,10 @@ const ProductCatalog = ({ limit = null, showViewAll = false }) => {
       <div className="container">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4" data-testid="catalog-title">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white luxury-heading" data-testid="catalog-title">
             {showViewAll ? "Featured" : "Our"} Collection
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Discover our curated selection of premium streetwear pieces
           </p>
         </div>
