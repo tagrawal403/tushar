@@ -21,6 +21,8 @@ import ReturnsPolicy from "./components/ReturnsPolicy";
 import ReturnRequest from "./components/ReturnRequest";
 import ShippingPolicy from "./components/ShippingPolicy";
 import TermsConditions from "./components/TermsConditions";
+import AboutUs from "./components/AboutUs";
+import StoreLocator from "./components/StoreLocator";
 import Footer from "./components/Footer";
 import AdminLogin from "./components/AdminLogin";
 import AdminDashboard from "./components/AdminDashboard";
