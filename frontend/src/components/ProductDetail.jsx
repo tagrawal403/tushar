@@ -119,33 +119,33 @@ const ProductDetail = () => {
             {/* Header */}
             <div>
               <div className="flex items-center space-x-2 mb-2">
-                <span className="text-sm text-orange-500 font-medium uppercase tracking-wider">
+                <span className="text-sm text-gold font-medium uppercase tracking-wider">
                   {product.category}
                 </span>
-                <span className={`px-2 py-1 text-xs rounded ${product.in_stock ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                <span className={`px-2 py-1 text-xs rounded ${product.in_stock ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'}`}>
                   {product.in_stock ? 'In Stock' : 'Out of Stock'}
                 </span>
               </div>
-              <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4" data-testid="product-name">
+              <h1 className="text-3xl lg:text-4xl font-bold text-white mb-4 luxury-heading" data-testid="product-name">
                 {product.name}
               </h1>
               <div className="flex items-center space-x-2 mb-4">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} className="text-yellow-400 fill-current" />
+                    <Star key={i} size={16} className="text-gold fill-current" />
                   ))}
                 </div>
-                <span className="text-gray-600 text-sm">(4.8) • 156 reviews</span>
+                <span className="text-gray-300 text-sm">(4.8) • 156 reviews</span>
               </div>
-              <p className="text-4xl font-bold text-orange-500 mb-6" data-testid="product-price">
+              <p className="text-4xl font-bold text-gold mb-6" data-testid="product-price">
                 ₹{product.price.toLocaleString()}
               </p>
             </div>
 
             {/* Description */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Description</h3>
-              <p className="text-gray-600 leading-relaxed" data-testid="product-description">
+              <h3 className="text-lg font-semibold text-white mb-2">Description</h3>
+              <p className="text-gray-300 leading-relaxed" data-testid="product-description">
                 {product.description}
               </p>
             </div>
