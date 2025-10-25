@@ -96,8 +96,8 @@ const ReturnsPolicy = () => {
         </div>
 
         {/* Return Process */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6" data-testid="return-process-title">
+        <div className="bg-gray-800/40 rounded-lg border border-gray-700 p-6 mb-8">
+          <h2 className="text-2xl font-semibold text-white mb-6" data-testid="return-process-title">
             How to Return an Item
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -106,16 +106,16 @@ const ReturnsPolicy = () => {
               return (
                 <div key={step.step} className="text-center" data-testid={`return-step-${step.step}`}>
                   <div className="relative mb-4">
-                    <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto">
-                      <IconComponent className="text-orange-600" size={24} />
+                    <div className="w-16 h-16 bg-gold-200/10 rounded-full flex items-center justify-center mx-auto border-2 border-gold-200/30">
+                      <IconComponent className="text-gold-200" size={24} />
                     </div>
-                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-gold-200 text-black rounded-full flex items-center justify-center text-sm font-bold">
                       {step.step}
                     </div>
                   </div>
-                  <h3 className="font-semibold text-gray-900 mb-2">{step.title}</h3>
-                  <p className="text-sm text-gray-600 mb-2">{step.description}</p>
-                  <div className="text-xs bg-orange-50 text-orange-600 px-2 py-1 rounded-full inline-block">
+                  <h3 className="font-semibold text-white mb-2">{step.title}</h3>
+                  <p className="text-sm text-gray-300 mb-2">{step.description}</p>
+                  <div className="text-xs bg-gold-200/20 text-gold-200 px-2 py-1 rounded-full inline-block border border-gold-200/30">
                     {step.timeframe}
                   </div>
                 </div>
