@@ -237,10 +237,10 @@ const ProductCatalog = ({ limit = null, showViewAll = false }) => {
                 <div className="flex items-center justify-between">
                   <Link
                     to={`/products/${product.id}`}
-                    className="text-gold font-medium hover:text-gold-200 transition-colors"
+                    className="text-gold-200 font-semibold hover:text-gold-100 transition-colors underline decoration-gold-200/50 hover:decoration-gold-100"
                     data-testid={`view-details-${product.id}`}
                   >
-                    View Details
+                    View Details →
                   </Link>
                   <span className={`text-xs px-2 py-1 rounded ${product.in_stock ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'}`}>
                     {product.in_stock ? 'In Stock' : 'Out of Stock'}
