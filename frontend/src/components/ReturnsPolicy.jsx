@@ -137,16 +137,16 @@ const ReturnsPolicy = () => {
 
         {/* Eligibility Criteria */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="bg-gray-800/40 rounded-lg border border-gray-700 p-6">
             <div className="flex items-center space-x-3 mb-4">
-              <CheckCircle className="text-green-500" size={24} />
-              <h3 className="text-xl font-semibold text-gray-900">Eligible for Returns</h3>
+              <CheckCircle className="text-green-400" size={24} />
+              <h3 className="text-xl font-semibold text-white">Eligible for Returns</h3>
             </div>
             <ul className="space-y-3">
               {eligibilityCriteria.map((criteria, index) => (
                 <li key={index} className="flex items-start space-x-3" data-testid={`eligible-criteria-${index}`}>
-                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-600 text-sm">{criteria}</span>
+                  <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-300 text-sm">{criteria}</span>
                 </li>
               ))}
             </ul>
