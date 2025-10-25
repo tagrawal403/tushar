@@ -205,6 +205,8 @@ function App() {
             } />
             <Route path="/shipping-policy" element={<ShippingPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/stores" element={<StoreLocator />} />
             <Route path="/admin" element={
               adminUser ? <Navigate to="/admin/dashboard" replace /> : <AdminLogin onLogin={handleAdminLogin} />
             } />
