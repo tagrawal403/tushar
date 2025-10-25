@@ -89,12 +89,12 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-transparent py-8">
       <div className="container mx-auto px-4">
         {/* Back Button */}
         <button
           onClick={() => navigate('/products')}
-          className="flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-colors mb-8"
+          className="flex items-center space-x-2 text-gray-200 hover:text-white transition-colors mb-8"
           data-testid="back-button"
         >
           <ArrowLeft size={20} />
