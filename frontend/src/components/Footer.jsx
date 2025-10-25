@@ -74,8 +74,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-2">
-            <Link to="/" className="text-2xl font-bold text-gold-200 mb-4 inline-block" data-testid="footer-logo">
-              THRYNN
+            <Link to="/" className="flex items-center space-x-3 mb-4" data-testid="footer-logo">
+              <img 
+                src="/thrynn-logo.jpg" 
+                alt="Thrynn Logo" 
+                className="h-8 w-8 object-contain filter brightness-110"
+              />
+              <span className="text-2xl font-bold text-gold-200">THRYNN</span>
             </Link>
             <p className="text-gray-400 mb-6 max-w-sm">
               Elevating streetwear culture with premium designs that define modern urban style. 
