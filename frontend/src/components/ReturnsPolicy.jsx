@@ -5,29 +5,29 @@ const ReturnsPolicy = () => {
   const returnSteps = [
     {
       step: 1,
-      title: "Initiate Return",
-      description: "Log into your account and select the item you want to return from your order history.",
+      title: "Place Return Request",
+      description: "Log into your account and select the item you want to return from your order history. Submit the return request with the reason.",
       icon: RotateCcw,
       timeframe: "Within 30 days"
     },
     {
       step: 2, 
-      title: "Print Return Label",
-      description: "Download and print the prepaid return shipping label we'll email to you.",
-      icon: Package,
-      timeframe: "Instant"
+      title: "Pickup Arranged",
+      description: "We will arrange for a pickup from your address. No need to ship it yourself! Our team will coordinate the pickup time with you.",
+      icon: Truck,
+      timeframe: "1-2 business days"
     },
     {
       step: 3,
-      title: "Pack & Ship",
-      description: "Pack the item in original packaging with tags attached and drop off at any courier location.",
-      icon: Truck,
-      timeframe: "Same day"
+      title: "Quality Check",
+      description: "Once we receive the item, our quality team will inspect it to ensure it meets our return criteria.",
+      icon: Package,
+      timeframe: "2-3 business days"
     },
     {
       step: 4,
-      title: "Processing",
-      description: "We'll inspect the returned item and process your refund or exchange.",
+      title: "Refund Initiated",
+      description: "After successful quality check, we'll process your refund to the original payment method.",
       icon: CheckCircle,
       timeframe: "3-5 business days"
     }
