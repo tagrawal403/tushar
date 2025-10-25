@@ -214,18 +214,18 @@ const ProductDetail = () => {
             </div>
 
             {/* Features */}
-            <div className="border-t border-gray-200 pt-6">
+            <div className="border-t border-gray-700 pt-6">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="flex items-center space-x-3 text-sm text-gray-600">
-                  <Truck size={20} className="text-orange-500" />
+                <div className="flex items-center space-x-3 text-sm text-gray-300">
+                  <Truck size={20} className="text-gold" />
                   <span>Free Shipping</span>
                 </div>
-                <div className="flex items-center space-x-3 text-sm text-gray-600">
-                  <Shield size={20} className="text-orange-500" />
+                <div className="flex items-center space-x-3 text-sm text-gray-300">
+                  <Shield size={20} className="text-gold" />
                   <span>Secure Payment</span>
                 </div>
-                <div className="flex items-center space-x-3 text-sm text-gray-600">
-                  <RotateCcw size={20} className="text-orange-500" />
+                <div className="flex items-center space-x-3 text-sm text-gray-300">
+                  <RotateCcw size={20} className="text-gold" />
                   <span>Easy Returns</span>
                 </div>
               </div>
