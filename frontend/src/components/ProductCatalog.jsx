@@ -182,8 +182,8 @@ const ProductCatalog = ({ limit = null, showViewAll = false }) => {
                   onClick={() => setSelectedCategory(category.id)}
                   className={`px-6 py-2 rounded-full font-medium transition-all ${
                     selectedCategory === category.id
-                      ? 'bg-orange-500 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'bg-gold text-black'
+                      : 'bg-gray-800 text-gray-200 hover:bg-gray-700 border border-gray-700'
                   }`}
                   data-testid={`category-${category.id}`}
                 >
