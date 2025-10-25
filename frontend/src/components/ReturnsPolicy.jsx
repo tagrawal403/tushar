@@ -152,16 +152,16 @@ const ReturnsPolicy = () => {
             </ul>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="bg-gray-800/40 rounded-lg border border-gray-700 p-6">
             <div className="flex items-center space-x-3 mb-4">
-              <AlertTriangle className="text-red-500" size={24} />
-              <h3 className="text-xl font-semibold text-gray-900">Not Eligible</h3>
+              <AlertTriangle className="text-red-400" size={24} />
+              <h3 className="text-xl font-semibold text-white">Not Eligible</h3>
             </div>
             <ul className="space-y-3">
               {nonReturnableItems.map((item, index) => (
                 <li key={index} className="flex items-start space-x-3" data-testid={`non-returnable-${index}`}>
-                  <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-600 text-sm">{item}</span>
+                  <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <span className="text-gray-300 text-sm">{item}</span>
                 </li>
               ))}
             </ul>
@@ -169,34 +169,34 @@ const ReturnsPolicy = () => {
         </div>
 
         {/* Refund Information */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Refund Information</h2>
+        <div className="bg-gray-800/40 rounded-lg border border-gray-700 p-6 mb-8">
+          <h2 className="text-2xl font-semibold text-white mb-6">Refund Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <h3 className="font-semibold text-gray-900 mb-3">Processing Time</h3>
+              <h3 className="font-semibold text-white mb-3">Processing Time</h3>
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Inspection & Approval:</span>
-                  <span className="font-medium">1-2 business days</span>
+                  <span className="text-gray-300">Quality Check:</span>
+                  <span className="font-medium text-white">2-3 business days</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Credit Card Refund:</span>
-                  <span className="font-medium">3-5 business days</span>
+                  <span className="text-gray-300">Credit Card Refund:</span>
+                  <span className="font-medium text-white">3-5 business days</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">UPI/Wallet Refund:</span>
-                  <span className="font-medium">1-2 business days</span>
+                  <span className="text-gray-300">UPI/Wallet Refund:</span>
+                  <span className="font-medium text-white">1-2 business days</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Bank Transfer:</span>
-                  <span className="font-medium">5-7 business days</span>
+                  <span className="text-gray-300">Bank Transfer:</span>
+                  <span className="font-medium text-white">5-7 business days</span>
                 </div>
               </div>
             </div>
             
             <div>
-              <h3 className="font-semibold text-gray-900 mb-3">Refund Method</h3>
-              <div className="space-y-3 text-sm text-gray-600">
+              <h3 className="font-semibold text-white mb-3">Refund Method</h3>
+              <div className="space-y-3 text-sm text-gray-300">
                 <p>• Refunds will be processed to the original payment method</p>
                 <p>• Store credit is available for faster processing</p>
                 <p>• Exchanges have priority over refunds</p>
