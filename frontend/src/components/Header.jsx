@@ -122,7 +122,7 @@ const Header = () => {
               <Link
                 to="/"
                 className={`font-medium ${
-                  isActive('/') ? 'text-gold' : 'text-gray-200'
+                  isActive('/') ? 'text-gold-200' : 'text-gray-200'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
                 data-testid="mobile-home-link"
@@ -132,7 +132,7 @@ const Header = () => {
               <Link
                 to="/products"
                 className={`font-medium ${
-                  isActive('/products') ? 'text-gold' : 'text-gray-200'
+                  isActive('/products') ? 'text-gold-200' : 'text-gray-200'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
                 data-testid="mobile-products-link"
@@ -142,7 +142,7 @@ const Header = () => {
               <Link
                 to="/admin"
                 className={`font-medium ${
-                  isActive('/admin') ? 'text-gold' : 'text-gray-200'
+                  isActive('/admin') ? 'text-gold-200' : 'text-gray-200'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
                 data-testid="mobile-admin-link"
