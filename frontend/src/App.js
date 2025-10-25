@@ -182,6 +182,7 @@ function App() {
     <AuthContext.Provider value={authContextValue}>
       <div className="App">
         <BrowserRouter>
+          <ScrollToTop />
           <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
