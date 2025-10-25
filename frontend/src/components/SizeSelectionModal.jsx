@@ -169,10 +169,10 @@ const SizeSelectionModal = ({
 
           {/* Stock Warning */}
           {selectedSize && getSizeStock(selectedSize) <= 5 && getSizeStock(selectedSize) > 0 && (
-            <div className="mb-6 p-3 bg-orange-50 border border-orange-200 rounded-lg">
+            <div className="mb-6 p-3 bg-gold-200/10 border border-gold-200/30 rounded-lg">
               <div className="flex items-center space-x-2">
-                <Package size={16} className="text-orange-600" />
-                <span className="text-sm text-orange-700">
+                <Package size={16} className="text-gold-600" />
+                <span className="text-sm text-gold-700 font-medium">
                   Only {getSizeStock(selectedSize)} items left in stock!
                 </span>
               </div>
