@@ -113,6 +113,20 @@ const Header = () => {
             )}
           </div>
 
+          {/* Mobile Cart Icon - Always Visible */}
+          <Link
+            to="/cart"
+            className="md:hidden relative p-2 text-gray-200"
+            data-testid="mobile-cart-icon"
+          >
+            <ShoppingCart size={24} />
+            {cartCount > 0 && (
+              <span className="cart-badge" data-testid="mobile-cart-count">
+                {cartCount}
+              </span>
+            )}
+          </Link>
+
           {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2 text-gray-200"
