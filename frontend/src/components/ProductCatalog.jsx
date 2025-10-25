@@ -234,10 +234,10 @@ const ProductCatalog = ({ limit = null, showViewAll = false }) => {
                   {product.description}
                 </p>
                 
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between relative z-10">
                   <Link
                     to={`/products/${product.id}`}
-                    className="text-gold-200 font-semibold hover:text-gold-100 transition-colors underline decoration-gold-200/50 hover:decoration-gold-100"
+                    className="text-gold-200 font-semibold hover:text-gold-100 transition-colors underline decoration-gold-200/50 hover:decoration-gold-100 cursor-pointer"
                     data-testid={`view-details-${product.id}`}
                   >
                     View Details →
