@@ -21,18 +21,21 @@ const Header = () => {
     <header className="sticky top-0 z-50 glass-effect border-b border-gray-200">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo with rotating symbol */}
+          {/* Logo - Luxury placement */}
           <Link 
             to="/" 
-            className="flex items-center space-x-3"
+            className="flex items-center space-x-3 group"
             data-testid="logo-link"
           >
-            <img 
-              src="/thrynn-logo.jpg" 
-              alt="Thrynn Logo" 
-              className="h-8 w-8 object-contain animate-spin-slow"
-            />
-            <span className="text-2xl font-bold text-gradient">THRYNN</span>
+            <div className="relative">
+              <img 
+                src="/thrynn-logo.jpg" 
+                alt="Thrynn Logo" 
+                className="h-10 w-10 object-contain filter brightness-110"
+              />
+              <div className="absolute inset-0 bg-gold-200/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <span className="text-2xl font-bold text-gradient tracking-wider">THRYNN</span>
           </Link>
 
           {/* Desktop Navigation */}
