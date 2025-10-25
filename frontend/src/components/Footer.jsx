@@ -74,7 +74,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-2">
-            <Link to="/" className="text-2xl font-bold text-orange-500 mb-4 inline-block" data-testid="footer-logo">
+            <Link to="/" className="text-2xl font-bold text-gold mb-4 inline-block" data-testid="footer-logo">
               THRYNN
             </Link>
             <p className="text-gray-400 mb-6 max-w-sm">
@@ -85,19 +85,19 @@ const Footer = () => {
             {/* Contact Info */}
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
-                <Mail size={16} className="text-orange-500" />
+                <Mail size={16} className="text-gold" />
                 <a href="mailto:hello@thrynn.com" className="text-gray-400 hover:text-white transition-colors">
                   hello@thrynn.com
                 </a>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone size={16} className="text-orange-500" />
+                <Phone size={16} className="text-gold" />
                 <a href="tel:+919876543210" className="text-gray-400 hover:text-white transition-colors">
                   +91-9876543210
                 </a>
               </div>
               <div className="flex items-start space-x-3">
-                <MapPin size={16} className="text-orange-500 mt-1" />
+                <MapPin size={16} className="text-gold mt-1" />
                 <span className="text-gray-400">
                   Mumbai, Maharashtra<br />
                   India - 400001
