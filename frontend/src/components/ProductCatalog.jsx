@@ -268,8 +268,8 @@ const ProductCatalog = ({ limit = null, showViewAll = false }) => {
         {/* Empty State */}
         {filteredProducts.length === 0 && !loading && (
           <div className="text-center py-12" data-testid="empty-state">
-            <p className="text-xl text-gray-600">No products found</p>
-            <p className="text-gray-500 mt-2">Try adjusting your search or filters</p>
+            <p className="text-xl text-gray-300">No products found</p>
+            <p className="text-gray-400 mt-2">Try adjusting your search or filters</p>
           </div>
         )}
       </div>
