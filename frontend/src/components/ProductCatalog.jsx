@@ -222,27 +222,27 @@ const ProductCatalog = ({ limit = null, showViewAll = false }) => {
               
               <div className="p-6">
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-lg font-semibold text-gray-800" data-testid={`product-name-${product.id}`}>
+                  <h3 className="text-lg font-semibold text-white" data-testid={`product-name-${product.id}`}>
                     {product.name}
                   </h3>
-                  <span className="text-xl font-bold text-orange-500" data-testid={`product-price-${product.id}`}>
+                  <span className="text-xl font-bold text-gold" data-testid={`product-price-${product.id}`}>
                     ₹{product.price.toLocaleString()}
                   </span>
                 </div>
                 
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                <p className="text-gray-300 text-sm mb-4 line-clamp-2">
                   {product.description}
                 </p>
                 
                 <div className="flex items-center justify-between">
                   <Link
                     to={`/products/${product.id}`}
-                    className="text-orange-500 font-medium hover:text-orange-600 transition-colors"
+                    className="text-gold font-medium hover:text-gold-200 transition-colors"
                     data-testid={`view-details-${product.id}`}
                   >
                     View Details
                   </Link>
-                  <span className={`text-xs px-2 py-1 rounded ${product.in_stock ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                  <span className={`text-xs px-2 py-1 rounded ${product.in_stock ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'}`}>
                     {product.in_stock ? 'In Stock' : 'Out of Stock'}
                   </span>
                 </div>
