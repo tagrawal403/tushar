@@ -15,17 +15,12 @@ const Footer = () => {
     ],
     company: [
       { label: "About Us", href: "/about" },
-      { label: "Careers", href: "/careers" },
-      { label: "Press", href: "/press" },
-      { label: "Sustainability", href: "/sustainability" },
       { label: "Store Locator", href: "/stores" }
     ],
     legal: [
       { label: "Terms & Conditions", href: "/terms-conditions" },
       { label: "Privacy Policy", href: "/privacy-policy" },
-      { label: "Cookie Policy", href: "/cookie-policy" },
-      { label: "Accessibility", href: "/accessibility" },
-      { label: "Sitemap", href: "/sitemap" }
+      { label: "Cookie Policy", href: "/cookie-policy" }
     ]
   };
 
