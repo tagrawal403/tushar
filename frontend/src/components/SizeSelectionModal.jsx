@@ -126,10 +126,10 @@ const SizeSelectionModal = ({
                   <button
                     key={color}
                     onClick={() => setSelectedColor(color)}
-                    className={`px-4 py-2 border-2 rounded-lg font-medium transition-all ${
+                    className={`px-4 py-2 border-2 rounded-lg font-semibold transition-all ${
                       selectedColor === color || (!selectedColor && color === product.available_colors[0])
-                        ? 'border-orange-500 bg-orange-50 text-orange-600'
-                        : 'border-gray-300 hover:border-gray-400'
+                        ? 'border-gold-200 bg-gold-200/10 text-gold-600'
+                        : 'border-gray-300 hover:border-gold-200/50 text-gray-900'
                     }`}
                     data-testid={`color-option-${color}`}
                   >
