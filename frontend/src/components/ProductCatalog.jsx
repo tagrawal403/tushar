@@ -197,14 +197,14 @@ const ProductCatalog = ({ limit = null, showViewAll = false }) => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProducts.map((product) => (
-            <div key={product.id} className="product-card fade-in" data-testid={`product-${product.id}`}>
+            <div key={product.id} className="product-card fade-in relative" data-testid={`product-${product.id}`}>
               <div className="relative overflow-hidden group">
                 <img
                   src={product.image_url}
                   alt={product.name}
                   className="product-image"
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none z-10">
                   <div className="flex space-x-4 pointer-events-auto">
                     <button
                       onClick={() => handleQuickAdd(product)}
@@ -220,7 +220,7 @@ const ProductCatalog = ({ limit = null, showViewAll = false }) => {
                 </div>
               </div>
               
-              <div className="p-6">
+              <div className="p-6 relative z-20">
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-lg font-semibold text-white" data-testid={`product-name-${product.id}`}>
                     {product.name}
