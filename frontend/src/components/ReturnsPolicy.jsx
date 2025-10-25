@@ -51,46 +51,46 @@ const ReturnsPolicy = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-transparent py-8">
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-100 rounded-full mb-4">
-            <RotateCcw className="text-orange-600" size={32} />
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gold-200/10 rounded-full mb-4 border-2 border-gold-200">
+            <RotateCcw className="text-gold-200" size={32} />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4" data-testid="returns-policy-title">
+          <h1 className="text-4xl font-bold text-white mb-4 luxury-heading" data-testid="returns-policy-title">
             Returns & Refunds Policy
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             We want you to love your THRYNN purchase. If you're not completely satisfied, 
-            we've made returns and exchanges simple and hassle-free.
+            we've made returns and exchanges simple and hassle-free with free pickup!
           </p>
         </div>
 
         {/* Policy Overview */}
-        <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-lg shadow-sm p-6 mb-8 text-white">
+        <div className="bg-gradient-to-r from-gold-200/20 to-gold-100/20 rounded-lg border border-gold-200/30 p-6 mb-8">
           <div className="flex items-center space-x-3 mb-4">
-            <CheckCircle size={32} />
+            <CheckCircle size={32} className="text-gold-200" />
             <div>
-              <h2 className="text-2xl font-semibold">30-Day Return Policy</h2>
-              <p className="text-green-100">Free returns and exchanges on all eligible items</p>
+              <h2 className="text-2xl font-semibold text-white">30-Day Return Policy</h2>
+              <p className="text-gray-300">Free pickup arranged at your doorstep for all eligible items</p>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
             <div className="text-center">
-              <Clock className="mx-auto mb-2" size={24} />
-              <p className="font-medium">30 Days</p>
-              <p className="text-sm text-green-100">Return window</p>
+              <Clock className="mx-auto mb-2 text-gold-200" size={24} />
+              <p className="font-medium text-white">30 Days</p>
+              <p className="text-sm text-gray-300">Return window</p>
             </div>
             <div className="text-center">
-              <Truck className="mx-auto mb-2" size={24} />
-              <p className="font-medium">Free Shipping</p>
-              <p className="text-sm text-green-100">On returns & exchanges</p>
+              <Truck className="mx-auto mb-2 text-gold-200" size={24} />
+              <p className="font-medium text-white">Free Pickup</p>
+              <p className="text-sm text-gray-300">We arrange pickup</p>
             </div>
             <div className="text-center">
-              <CheckCircle className="mx-auto mb-2" size={24} />
-              <p className="font-medium">Easy Process</p>
-              <p className="text-sm text-green-100">Online return portal</p>
+              <CheckCircle className="mx-auto mb-2 text-gold-200" size={24} />
+              <p className="font-medium text-white">Easy Process</p>
+              <p className="text-sm text-gray-300">Online return portal</p>
             </div>
           </div>
         </div>
