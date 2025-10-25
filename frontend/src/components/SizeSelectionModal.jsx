@@ -86,12 +86,12 @@ const SizeSelectionModal = ({
                     key={size}
                     onClick={() => !isOutOfStock && setSelectedSize(size)}
                     disabled={isOutOfStock}
-                    className={`p-3 border-2 rounded-lg font-medium transition-all relative ${
+                    className={`p-3 border-2 rounded-lg font-semibold transition-all relative ${
                       selectedSize === size
-                        ? 'border-orange-500 bg-orange-50 text-orange-600'
+                        ? 'border-gold-200 bg-gold-200/10 text-gold-600'
                         : isOutOfStock
                         ? 'border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed'
-                        : 'border-gray-300 hover:border-gray-400'
+                        : 'border-gray-300 hover:border-gold-200/50 text-gray-900'
                     }`}
                     data-testid={`size-option-${size}`}
                   >
