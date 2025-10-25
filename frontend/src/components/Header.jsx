@@ -66,7 +66,7 @@ const Header = () => {
             {/* Cart is always visible */}
             <Link
               to="/cart"
-              className="relative p-2 text-gray-700 hover:text-orange-500 transition-colors"
+              className="relative p-2 text-gray-200 hover:text-gold transition-colors"
               data-testid="cart-link"
             >
               <ShoppingCart size={24} />
@@ -81,14 +81,14 @@ const Header = () => {
               <>
                 <Link
                   to="/profile"
-                  className="p-2 text-gray-700 hover:text-orange-500 transition-colors"
+                  className="p-2 text-gray-200 hover:text-gold transition-colors"
                   data-testid="profile-link"
                 >
                   <User size={24} />
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="p-2 text-gray-700 hover:text-red-500 transition-colors"
+                  className="p-2 text-gray-200 hover:text-red-400 transition-colors"
                   data-testid="logout-button"
                 >
                   <LogOut size={24} />
