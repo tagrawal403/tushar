@@ -29,10 +29,19 @@ const Hero = () => {
       {/* Hero Content */}
       <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
         <div className="slide-up">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight" data-testid="hero-title">
+          {/* Logo in Hero - Subtle and Elegant */}
+          <div className="flex justify-center mb-8">
+            <img 
+              src="/thrynn-logo.jpg" 
+              alt="Thrynn" 
+              className="h-16 w-16 object-contain filter brightness-110 opacity-90"
+            />
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight luxury-heading" data-testid="hero-title">
             Elevate Your
             <br />
-            <span className="text-gradient bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">
+            <span className="text-gradient bg-gradient-to-r from-gold-200 to-gold-100 bg-clip-text text-transparent">
               Street Style
             </span>
           </h1>
