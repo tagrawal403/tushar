@@ -225,7 +225,7 @@ const ProductCatalog = ({ limit = null, showViewAll = false }) => {
                   <h3 className="text-lg font-semibold text-white" data-testid={`product-name-${product.id}`}>
                     {product.name}
                   </h3>
-                  <span className="text-xl font-bold text-gold" data-testid={`product-price-${product.id}`}>
+                  <span className="text-xl font-bold text-gold-200" data-testid={`product-price-${product.id}`}>
                     ₹{product.price.toLocaleString()}
                   </span>
                 </div>
