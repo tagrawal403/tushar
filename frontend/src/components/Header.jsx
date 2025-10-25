@@ -117,12 +117,12 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
+          <div className="md:hidden py-4 border-t border-gray-700">
             <nav className="flex flex-col space-y-4">
               <Link
                 to="/"
                 className={`font-medium ${
-                  isActive('/') ? 'text-orange-500' : 'text-gray-700'
+                  isActive('/') ? 'text-gold' : 'text-gray-200'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
                 data-testid="mobile-home-link"
@@ -132,7 +132,7 @@ const Header = () => {
               <Link
                 to="/products"
                 className={`font-medium ${
-                  isActive('/products') ? 'text-orange-500' : 'text-gray-700'
+                  isActive('/products') ? 'text-gold' : 'text-gray-200'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
                 data-testid="mobile-products-link"
@@ -142,7 +142,7 @@ const Header = () => {
               <Link
                 to="/admin"
                 className={`font-medium ${
-                  isActive('/admin') ? 'text-orange-500' : 'text-gray-700'
+                  isActive('/admin') ? 'text-gold' : 'text-gray-200'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
                 data-testid="mobile-admin-link"
@@ -154,7 +154,7 @@ const Header = () => {
                 <>
                   <Link
                     to="/cart"
-                    className="flex items-center space-x-2 text-gray-700"
+                    className="flex items-center space-x-2 text-gray-200"
                     onClick={() => setIsMobileMenuOpen(false)}
                     data-testid="mobile-cart-link"
                   >
@@ -163,7 +163,7 @@ const Header = () => {
                   </Link>
                   <Link
                     to="/profile"
-                    className="flex items-center space-x-2 text-gray-700"
+                    className="flex items-center space-x-2 text-gray-200"
                     onClick={() => setIsMobileMenuOpen(false)}
                     data-testid="mobile-profile-link"
                   >
@@ -175,7 +175,7 @@ const Header = () => {
                       handleLogout();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="flex items-center space-x-2 text-red-500"
+                    className="flex items-center space-x-2 text-red-400"
                     data-testid="mobile-logout-button"
                   >
                     <LogOut size={20} />
