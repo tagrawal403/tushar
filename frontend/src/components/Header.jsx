@@ -21,13 +21,18 @@ const Header = () => {
     <header className="sticky top-0 z-50 glass-effect border-b border-gray-200">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+          {/* Logo with rotating symbol */}
           <Link 
             to="/" 
-            className="text-2xl font-bold text-gradient"
+            className="flex items-center space-x-3"
             data-testid="logo-link"
           >
-            THRYNN
+            <img 
+              src="/thrynn-logo.jpg" 
+              alt="Thrynn Logo" 
+              className="h-8 w-8 object-contain animate-spin-slow"
+            />
+            <span className="text-2xl font-bold text-gradient">THRYNN</span>
           </Link>
 
           {/* Desktop Navigation */}
